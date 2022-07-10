@@ -1,22 +1,23 @@
 #include <stdio.h>
 
 int main(void){
-    int k,n,t,num;
-    int i,j,a;
+    int k,n,t;
+    int i,j;
+    int num[15][14];
+    for(i=0;i<15;i++){
+        num[i][0]=1;
+    }
+    for(i=0;i<14;i++){
+        num[0][i]=i+1;
+    }
+    for(i=1;i<15;i++){
+        for(j=1;j<14;j++){
+            num[i][j]=num[i][j-1]+num[i-1][j];
+        }
+    }
     scanf("%d",&t);
-    for(a=0;a<t;a++){
+    for(i=0;i<t;i++){
         scanf("%d\n%d", &k, &n);
-        int num[k][n];
-        for(i=0;i<k;i++){
-            num[i][0]=1;
-        }
-        for(i=0;i<n;i++){
-            num[0][i]=i+1;
-        }
-        for(i=1;i<k;i++){
-            for(j=0;j<n;j++){
-                num[]
-            }
-        }
+        printf("%d\n",num[k][n-1]);
     }
 }

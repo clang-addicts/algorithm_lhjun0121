@@ -1,21 +1,27 @@
 #include <stdio.h>
 
 int same(int x){
-    if(x%10-(x/10)%10==(x/10)%10-x/100)
+    int a=x/100;
+    int b=(x/10)%10;
+    int c=x%10;
+    if(a-b==b-c)
         return 1;
     else
         return 0;
 }
 
 int main(void){
-    int N,i;
+    int N,i,count=0;
     scanf("%d",&N);
-    int arr[1001]={0,};
-    int count=0;
-    for(i=1;i<=N;i++){
-        arr[i]=same(i);
-        if(arr[i]==1)
-            count+=1;
+    if(N<100){
+        printf("%d",N);
     }
-    printf("%d",count);
+    else{
+        for(i=100;i<N+1;i++){
+            if(same(i)==1){
+                count++;
+            }
+        }
+    printf("%d",count+99);
+    }
 }
