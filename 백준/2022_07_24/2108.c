@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
-int arr[500000];
+int arr[500001];
 
 int compare(const void *a, const void *b)
 {
@@ -15,32 +16,39 @@ int compare(const void *a, const void *b)
     return 0;
 }
 
+int avg(int arr[],int n)
+{
+	double sum=0;
+	int i;
+	for(i=0;i<n;i++)
+	{
+		sum+=(arr[i]);
+	}
+	return round(sum/n);
+}
+
 int mode(int n){
 	int count[8001]={0,};
-	int i,j=0,max=0;
-    int cnt[2]={0,};
-	for(i=0;i<n;i++){   //arr요소값들을 count인덱스값으로
+	int i,j=-1,max=0,MAX;
+    int cnt[4000]={0,};
+	for(i=0;i<n;i++){
 		count[arr[i]+4000]++;
 	}
-	for(i=0;i<8001;i++){    //몇개가 최빈값인지 찾기
+	for(i=0;i<8001;i++){
 		if(count[i]>max){
 			max=count[i];
 		}
 	}
 	for(i=0;i<8001;i++){
 		if(count[i]==max){
-            cnt[j]=i-4000;
-            j++;
-            if(j==2)
-                break;
+            MAX=i-4000;
+            if(j==1){
+            	break;
+            }
+            j*=-1;
         }
 	}
-    if(cnt[1]==0){
-        return cnt[0];
-    }
-    else{
-        return cnt[1];
-    }
+	return MAX;
 }
 
 int main(void){
@@ -51,13 +59,8 @@ int main(void){
 		sum+=arr[i];
 	}
 	qsort(arr,N,sizeof(int),compare);
-	if(sum/(double)N<0.5&&sum/(double)N>-0.5){
-        printf("0\n");
-    }
-    else{
-        printf("%.0f\n",sum/(double)N);
-    }
-	printf("%d\n",arr[N/2]);
+    printf("%d\n",avg(arr,N));
+	printf("%d\n",arr[(N-1)/2]);
 	printf("%d\n",mode(N));
 	printf("%d",arr[N-1]-arr[0]);
 	return 0;
